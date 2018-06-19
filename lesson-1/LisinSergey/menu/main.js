@@ -39,7 +39,7 @@ function generateMenu(list) {
     var content = "<ul>";
     for (var _i = 0, list_1 = list; _i < list_1.length; _i++) {
         var a = list_1[_i];
-        content += "<li><a class=\"" + ((a.items) ? 'title' : null) + "\">" + a.title + "</a>";
+        content += "<li><a" + ((a.items) ? ' class="title"' : null) + ">" + a.title + "</a>";
         if (a.items) {
             content += generateMenu(a.items);
         }

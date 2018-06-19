@@ -43,7 +43,7 @@ const menuList: IMenu[] = [
 function generateMenu(list: IMenu[]): string {
     let content = `<ul>`;
     for (const a of list) {
-        content += `<li><a class="${(a.items) ? 'title' : null}">${a.title}</a>`;
+        content += `<li><a${(a.items) ? ' class="title"' : null}>${a.title}</a>`;
         if (a.items) {
             content += generateMenu(a.items);
         }
