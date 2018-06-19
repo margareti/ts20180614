@@ -1,6 +1,6 @@
 export type menuItem = {
-    title : string;
-    items? : menuItem[];
+  title: string;
+  items?: menuItem[];
 }
 
-export type menuList = menuItem[];
+export type menuList = menuItem[]
