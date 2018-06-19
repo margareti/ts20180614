@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "tslint -p lesson-1/home-work/tsconfig.json",
+    "lint-fix": "tslint --fix -p lesson-1/home-work/tsconfig.json",
+    "build": "tsc -p lesson-1/home-work/tsconfig.json"
   },
   "keywords": [],
   "author": "",
