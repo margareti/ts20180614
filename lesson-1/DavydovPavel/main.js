@@ -5,7 +5,7 @@ var listMenu = [
             {
                 title: 'Млекопитающие',
                 items: [
-                    { title: 'Коровы' },
+                    { title: 'Коровы', items: [] },
                     { title: 'Ослы' },
                     { title: 'Собаки' },
                     { title: 'Кошки', items: [{ title: 'Тигры' }, { title: 'Львы' }] },
@@ -42,7 +42,7 @@ var listMenu = [
 function generateMenu(list) {
     var content = '<ul>';
     list.forEach(function (a) {
-        var flag = a.items !== undefined, templ = flag ? "<a class='title'>" + a.title + "</a>" + generateMenu(a.items) : "<a>" + a.title + "</a>";
+        var flag = a.items !== undefined && a.items.length, templ = flag ? "<a class='title'>" + a.title + "</a>" + generateMenu(a.items) : "<a>" + a.title + "</a>";
         content += "<li>" + templ + "</li>";
     });
     content += '</ul>';

@@ -10,7 +10,7 @@ const listMenu: IMenu[] = [
 			{
 				title: 'Млекопитающие',
 				items: [
-					{ title: 'Коровы' },
+					{ title: 'Коровы', items: [] },
 					{ title: 'Ослы' },
 					{ title: 'Собаки' },
 					{ title: 'Кошки', items: [{ title: 'Тигры' }, { title: 'Львы' }] },
@@ -48,7 +48,7 @@ const listMenu: IMenu[] = [
 function generateMenu(list: IMenu[]): string {
 	let content = '<ul>';
 	list.forEach(a => {
-		const flag = a.items !== undefined,
+		const flag = a.items !== undefined && a.items.length,
 			templ = flag ? `<a class='title'>${a.title}</a>${generateMenu(a.items as IMenu[])}` : `<a>${a.title}</a>`;
 
 		content += `<li>${templ}</li>`;
