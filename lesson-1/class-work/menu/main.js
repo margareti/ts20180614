@@ -66,8 +66,9 @@ var renderItem = function (item) {
     li.appendChild(link);
     if (item.hasOwnProperty('items') && Array.isArray(item.items)) {
         li.appendChild(renderList(item.items));
+        link.classList.add('title');
         link.addEventListener('click', function () {
-            li.classList.toggle('menu-open');
+            li.classList.toggle('open');
         });
     }
     return li;
@@ -75,15 +76,5 @@ var renderItem = function (item) {
 var navMenuList = document.querySelector('.menu');
 if (navMenuList) {
     var rendered = renderList(menuData);
-    console.log(rendered);
     navMenuList.appendChild(rendered);
-    // navMenuList.onclick = (ev: MouseEvent) => {
-    //     const el: HTMLAnchorElement = ev.target as HTMLAnchorElement;
-    //     const classList = el.classList;
-    //     if (!classList.contains('title')) {
-    //         return;
-    //     }
-    //     const parentLi = el.parentNode as HTMLLIElement;
-    //     parentLi.classList.toggle('menu-open');
-    // };
 }

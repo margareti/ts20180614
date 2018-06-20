@@ -73,8 +73,9 @@ const renderItem = (item: itemMenu): HTMLLIElement => {
   li.appendChild(link);
   if (item.hasOwnProperty('items') && Array.isArray(item.items)) {
     li.appendChild(renderList(item.items));
+    link.classList.add('title');
     link.addEventListener('click', () => {
-      li.classList.toggle('menu-open');
+      li.classList.toggle('open');
     });
   }
   return li;
