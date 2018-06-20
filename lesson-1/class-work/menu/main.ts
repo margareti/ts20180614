@@ -1,6 +1,25 @@
-interface IMenu {
-    title: string;
-    items: string[];
+import Data from './menuData';
+
+function renderList(list: string[]) {
+  const ul = document.createElement('ul');
+  list.forEach((linkText) => {
+    const li = document.createElement('li');
+    const link = document.createElement('a');
+    link.innerText = linkText;
+    li.appendChild(link);
+    ul.appendChild(li);
+  });
+  return ul;
+}
+
+type itemType = {
+  title: string,
+  items?: itemType[],
+};
+
+function renderItem(item: itemType) {
+  const link = document.createElement('a');
+  link.innerText = item.title;
 }
 
 const menuList: IMenu[] = [

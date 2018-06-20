@@ -1,7 +1,6 @@
-'use strict';
 import data from './menuData';
 
-function renderDropList(list) {
+function renderDropList(list: string[]) {
   list.for;
 }
 

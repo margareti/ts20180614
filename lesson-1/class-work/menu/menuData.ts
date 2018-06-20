@@ -1,4 +1,4 @@
-const menu = [
+export default menu = [
   {
     title: 'Животные',
     items: [
@@ -51,5 +51,3 @@ const menu = [
     ]
   }
 ];
-
-export default menu;
