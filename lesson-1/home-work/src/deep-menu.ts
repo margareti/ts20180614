@@ -1,6 +1,8 @@
 import { menuData } from './menu-data'
 import { menuList } from './type-defs'
 
+drawDeepMenu()
+
 function getMenuHtmlRec (menu: menuList): string {
   if (!menu.length) {
     return ''
@@ -19,7 +21,7 @@ function getMenuHtmlRec (menu: menuList): string {
   return `<ul>${listItems}</ul>`
 }
 
-export function drawDeepMenu (): void {
+function drawDeepMenu (): void {
   const ctnr = document.querySelector('.menu')
   const menuHtml = getMenuHtmlRec(menuData)
 
