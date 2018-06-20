@@ -33,11 +33,14 @@ function getMenuHtmlRec (menu: menuList): string {
   }
 
   const listItems = menu.reduce((html, menuItem) => {
+    const children = menuItem.items || []
+    const final = children.length ? '' : 'final'
+
     return `
             ${html}
-            <li>
+            <li class="${final}">
                 <a class="title">${menuItem.title}</a>
-                ${getMenuHtmlRec(menuItem.items || [])}
+                ${getMenuHtmlRec(children)}
             </li>
         `
   }, '')
@@ -52,7 +55,10 @@ function listItemClickListener (ev: Event): void {
     return
   }
 
-  toggleListItem(listItem)
+  if (listItem.className.indexOf('final') === -1) {
+    toggleListItem(listItem)
+  }
+
   ev.stopPropagation()
 }
 
