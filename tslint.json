@@ -1,5 +1,4 @@
 {
-  "extends": "tslint-config-standard",
   "rules": {
     "await-promise": false,
     "no-unused-variable": false,
