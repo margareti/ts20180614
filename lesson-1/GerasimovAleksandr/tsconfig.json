@@ -1,0 +1,13 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "removeComments": true,
+        "target": "es6"
+    },
+    "files": [
+        "index.ts"
+    ],
+    "include": [
+        "index.ts"
+    ]
+}
