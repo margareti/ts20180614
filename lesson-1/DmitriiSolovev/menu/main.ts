@@ -1,76 +1,78 @@
 interface IMenu {
-  title: string
-  items?: IMenu[]
+    title: string;
+    items?: IMenu[];
 }
 
 const menuList: IMenu[] = [
-  {
-    title: "Животныеt",
-    items: [
-      {
-        title: "Млекопитающие",
+    {
+        title: 'Животныеt',
         items: [
-          { title: "Коровы" },
-          { title: "Ослы" },
-          { title: "Собаки" },
-          { title: "Тигры" },
+            {
+                title: 'Млекопитающие',
+                items: [
+                    {title: 'Коровы'},
+                    {title: 'Ослы'},
+                    {title: 'Собаки'},
+                    {title: 'Тигры'},
+                ],
+            },
+            {
+                title: 'Другие',
+                items: [{title: 'Змеи'}, {title: 'Птицы'}, {title: 'Ящерицы'}],
+            },
         ],
-      },
-      {
-        title: "Другие",
-        items: [{ title: "Змеи" }, { title: "Птицы" }, { title: "Ящерицы" }],
-      },
-    ],
-  },
-  {
-    title: "Рыбы",
-    items: [
-      {
-        title: "Аквариумные",
-        items: [{ title: "Гуппи" }, { title: "Скалярии" }],
-      },
-      {
-        title: "Форель",
-        items: [{ title: "Морская форель" }],
-      },
-    ],
-  },
-]
+    },
+    {
+        title: 'Рыбы',
+        items: [
+            {
+                title: 'Аквариумные',
+                items: [{title: 'Гуппи'}, {title: 'Скалярии'}],
+            },
+            {
+                title: 'Форель',
+                items: [{title: 'Морская форель'}],
+            },
+        ],
+    },
+];
 
 function render(list: IMenu[]): string {
-  let content = "<ul>"
+    let content = '<ul>';
 
-  for (const item of list) {
-    content = content + "<li>"
+    for (const item of list) {
+        content = content + '<li>';
+        const arr = item
+            ? item.items
+            : null;
+        if (Array.isArray(arr)) {
+            content = content + `<a class="title">${item.title}</a>`;
+            content = content + render(arr);
+        } else {
+            content = content + `<a>${item.title}</a>`;
+        }
 
-    if (item.items && item.items.length > 0) {
-      content = content + `<a class="title">${item.title}</a>`
-      content = content + render(item.items)
-    } else {
-      content = content + `<a>${item.title}</a>`
+        content = content + '</li>';
     }
 
-    content = content + "</li>"
-  }
+    content = content + '</ul>';
 
-  content = content + "</ul>"
-
-  return content
+    return content;
 }
 
-const navMenuList: HTMLDivElement | null = document.querySelector(".menu")
+const navMenuList: HTMLDivElement | null = document.querySelector('.menu');
 
 if (navMenuList) {
-  navMenuList.innerHTML = render(menuList)
+    navMenuList.innerHTML = render(menuList);
 
-  navMenuList.addEventListener("click", (e: MouseEvent) => {
-    const el = e.target as HTMLAnchorElement
+    navMenuList.addEventListener('click', (e: MouseEvent) => {
+        const el = e.target as HTMLAnchorElement;
 
-    if (!el.classList.contains("title")) {
-      return
-    }
+        if (!el.classList.contains('title')) {
+            return;
+        }
 
-    const parentLi = el.parentElement as HTMLLIElement
-    parentLi.classList.toggle("menu-open")
-  })
+        const parentLi = el.parentElement as HTMLLIElement;
+        parentLi.classList.toggle('menu-open');
+    });
 }
