@@ -1,44 +1,89 @@
-interface IMenu {
-    title: string;
-    items: string[];
-}
-
-const menuList: IMenu[] = [
-    {
-        title: 'JavaScript',
-        items: ['Angular', 'Vue', 'React']
-    },
-    {
-        title: 'Dart',
-        items: ['Angular', 'Polymer']
-    }
+const menuData = [
+  {
+    title: 'Животные',
+    items: [
+      {
+        title: 'Млекопитающие',
+        items: [
+          {
+            title: 'Коровы'
+          }, {
+            title: 'Ослы'
+          }, {
+            title: 'Собаки'
+          }, {
+            title: 'Тигры'
+          }
+        ]
+      }, {
+        title: 'Другие',
+        items: [
+          {
+            title: 'Змеи'
+          }, {
+            title: 'Птицы'
+          }, {
+            title: 'Ящерицы'
+          }
+        ]
+      }
+    ]
+  }, {
+    title: 'Рыбы',
+    items: [
+      {
+        title: 'Аквариумные',
+        items: [
+          {
+            title: 'Гуппи'
+          }, {
+            title: 'Скалярии'
+          }
+        ]
+      }, {
+        title: 'Форель',
+        items: [
+          {
+            title: 'Морская форель'
+          }
+        ]
+      }
+    ]
+  }
 ];
 
-function generateMenu(list: IMenu[]): string {
-    let content = `<ul>`;
-    for (const a of list) {
-        content += `<li><a class='title'>${a.title}</a><ul>`;
-        for (const item of a.items) {
-            content += `<li><a>${item}</a></li>`;
-        }
-        content += `</li></ul>`;
-    }
-    content += `</ul>`;
-    return content;
-}
 
+type itemMenu = {
+  title: string,
+  items?: itemMenu[],
+};
 
-let navMenuList: HTMLDivElement | null = document.querySelector('.menu');
+const renderList = (list: itemMenu[]): HTMLUListElement => {
+  const ul: HTMLUListElement = document.createElement('ul');
+  list.forEach((item) => {
+    ul.appendChild(renderItem(item));
+  });
+  return ul;
+};
+
+const renderItem = (item: itemMenu): HTMLLIElement => {
+  const li: HTMLLIElement = document.createElement('li');
+  const link: HTMLAnchorElement = document.createElement('a');
+  link.innerText = item.title;
+  li.appendChild(link);
+  if (item.hasOwnProperty('items') && Array.isArray(item.items)) {
+    li.appendChild(renderList(item.items));
+    link.classList.add('title');
+    link.addEventListener('click', () => {
+      li.classList.toggle('open');
+    });
+  }
+  return li;
+};
+
+const navMenuList: HTMLDivElement | null = document.querySelector('.menu');
 
 if (navMenuList) {
-    navMenuList.innerHTML = generateMenu(menuList);
-    navMenuList.onclick = (ev: MouseEvent) => {
-        const el: HTMLAnchorElement = ev.target as HTMLAnchorElement;
-        const classList = el.classList;
-        if (!classList.contains('title')) {
-            return;
-        }
-        const parentLi = el.parentNode as HTMLLIElement;
-        parentLi.classList.toggle('menu-open');
-    };
+  const rendered = renderList(menuData);
+  navMenuList.appendChild(rendered);
 }
