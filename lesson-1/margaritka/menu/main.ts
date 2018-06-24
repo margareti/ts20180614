@@ -1,7 +1,7 @@
 
 interface IMenu {
   title: string,
-  items?: any
+  items?: IMenu[]
 }
 
 
