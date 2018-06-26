@@ -113,6 +113,7 @@ const generateMenu = (menuItems: IMenu[]):DocumentFragment => {
     const generatedMenu = generateMenuItem(menuItem);
     fragment.appendChild(generatedMenu);
   })
+
   return fragment;
 }
 const menuEl: HTMLDivElement | null = document.querySelector('.menu');
